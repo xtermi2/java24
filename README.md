@@ -12,16 +12,34 @@
     - TODO
 - [JEP 450: Compact Object Headers (Experimental)](https://openjdk.org/jeps/450)
     - TODO
-- [JEP 447204: Prepare to Restrict the Use of JNI](https://openjdk.org/jeps/472)
-    - TODO
+- [JEP 472: Prepare to Restrict the Use of JNI](https://openjdk.org/jeps/472)
+    - Issue warnings about uses of the Java Native Interface (JNI) and adjust the Foreign Function & Memory (FFM) API to issue warnings in a consistent manner. All such warnings aim to prepare developers for a future release that ensures integrity by default by uniformly restricting JNI and the FFM API.
 - [JEP 475: Late Barrier Expansion for G1](https://openjdk.org/jeps/475)
-    - TODO
+    - Simplify the implementation of the G1 garbage collector's barriers, which record information about application memory accesses, by shifting their expansion from early in the C2 JIT's compilation pipeline to later.
 - [JEP 478: Key Derivation Function API (Preview)](https://openjdk.org/jeps/478)
     - TODO
 - [JEP 479: Remove the Windows 32-bit x86 Port](https://openjdk.org/jeps/479)
-    - TODO
+    - Remove the source code and build support for the Windows 32-bit x86 port. This port was deprecated for removal in JDK 21 with the express intent to remove it in a future release.
 - [JEP 483: Ahead-of-Time Class Loading & Linking](https://openjdk.org/jeps/483)
-    - TODO
+    - Improve startup time by making the classes of an application instantly available, in a loaded and linked state, when the HotSpot Java Virtual Machine starts. Achieve this by monitoring the application during one run and storing the loaded and linked forms of all classes in a cache for use in subsequent runs.
+    - Part of [Project Leyden](https://openjdk.org/projects/leyden/)
+    - 1st recording run `java -XX:AOTMode=record -XX:AOTConfiguration=app.aotconf -cp app.jar com.example.App`
+    - 2nd create the cache from the configuration `java -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf -XX:AOTCache=app.aot -cp app.jar`
+    - 3rd run the application with the cache `java -XX:AOTCache=app.aot -cp app.jar com.example.App`
+    - same JDK release and same hardware architecture is required!
+    - Class paths must contain only JAR files
+    - APIs used by JVMTI agents are limited
+  ```bash
+  ./mvnw clean package
+  
+  java -XX:AOTMode=record -XX:AOTConfiguration=target/app.aotconf --enable-preview --enable-native-access=ALL-UNNAMED -Dforeign.restricted=permit -cp target/java24-1.0-SNAPSHOT.jar com.github.xtermi2.java24.jep494moduleimport.ModuleImportDeclaration
+  
+  java -XX:AOTMode=create -XX:AOTConfiguration=target/app.aotconf -XX:AOTCache=target/app.aot --enable-preview --enable-native-access=ALL-UNNAMED -Dforeign.restricted=permit -cp target/java24-1.0-SNAPSHOT.jar
+  
+  time java -XX:AOTCache=target/app.aot --enable-preview --enable-native-access=ALL-UNNAMED -Dforeign.restricted=permit -cp target/java24-1.0-SNAPSHOT.jar com.github.xtermi2.java24.jep494moduleimport.ModuleImportDeclaration
+  
+  time java --enable-preview --enable-native-access=ALL-UNNAMED -Dforeign.restricted=permit -cp target/java24-1.0-SNAPSHOT.jar com.github.xtermi2.java24.jep494moduleimport.ModuleImportDeclaration
+  ```
 - [JEP 484: Class-File API](https://openjdk.org/jeps/484)
     - Provide a standard API for parsing, generating, and transforming Java class files.
     - Minor changes since second Preview contains refinements based upon experience and feedback.
