@@ -57,7 +57,7 @@
     - No changes since second preview in JDK 23.
     - See example `StreamGatherers.java`
 - [JEP 486: Permanently Disable the Security Manager](https://openjdk.org/jeps/486)
-    - TODO
+    - The Security Manager has not been the primary means of securing client-side Java code for many years, it has rarely been used to secure server-side code, and it is costly to maintain. We therefore deprecated it for removal in Java 17 via JEP 411 (2021). As the next step toward removing the Security Manager, we will revise the Java Platform specification so that developers cannot enable it and other Platform classes do not refer to it.
 - [JEP 487: Scoped Values (Fourth Preview)](https://openjdk.org/jeps/487)
     - Enable the sharing of immutable data within and across threads. They are preferred to thread-local variables,
       especially when using large numbers of virtual threads.
@@ -84,9 +84,10 @@
       that time, the Vector API will be adapted and its implementation to use them, and will be promoted from incubation
       to preview.
 - [JEP 490: ZGC: Remove the Non-Generational Mode](https://openjdk.org/jeps/490)
-    - TODO
+    - Remove the non-generational mode of the Z Garbage Collector (ZGC), keeping the generational mode as the default for ZGC.
+    - Reduce the maintenance cost of supporting two different modes.
 - [JEP 491: Synchronize Virtual Threads without Pinning](https://openjdk.org/jeps/491)
-    - TODO
+    - Improve the scalability of Java code that uses synchronized methods and statements by arranging for virtual threads that block in such constructs to release their underlying platform threads for use by other virtual threads. This will eliminate nearly all cases of virtual threads being pinned to platform threads, which severely restricts the number of virtual threads available to handle an application's workload.
 - [JEP 492: Flexible Constructor Bodies (Third Preview)](https://openjdk.org/jeps/492)
     - In constructors in the Java programming language, allow statements that do not reference the instance being
       created to appear before an explicit constructor invocation.
