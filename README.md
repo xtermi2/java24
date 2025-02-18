@@ -9,15 +9,22 @@
 # JDK 24 Features
 
 - [JEP 404: Generational Shenandoah (Experimental)](https://openjdk.org/jeps/404)
-    - TODO
+    - Enhance the [Shenandoah garbage collector](https://openjdk.org/projects/shenandoah/) with experimental generational collection capabilities to improve sustainable throughput, load-spike resilience, and memory utilization.
+    - Continue to support compressed object pointers.
+    - It is not a goal to improve CPU and power usage compared to traditional stop-the-world GCs. If longer pauses can be tolerated, other collectors such as G1 may still provide more energy-efficient behavior.
+    - activate via `-XX:+UnlockExperimentalVMOptions -XX:ShenandoahGCMode=generational`
 - [JEP 450: Compact Object Headers (Experimental)](https://openjdk.org/jeps/450)
-    - TODO
+    - Reduce the size of object headers in the HotSpot JVM from between 96 and 128 bits down to 64 bits on 64-bit architectures. This will reduce heap size, improve deployment density, and increase data locality.
+    - Part of [project Lilliput](https://openjdk.org/projects/lilliput/)
+    - Early adopters of Project Lilliput who have tried it with real-world applications confirm that live data is typically reduced by 10%–20%.
+    - activate via `-XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders` 
 - [JEP 472: Prepare to Restrict the Use of JNI](https://openjdk.org/jeps/472)
     - Issue warnings about uses of the Java Native Interface (JNI) and adjust the Foreign Function & Memory (FFM) API to issue warnings in a consistent manner. All such warnings aim to prepare developers for a future release that ensures integrity by default by uniformly restricting JNI and the FFM API.
 - [JEP 475: Late Barrier Expansion for G1](https://openjdk.org/jeps/475)
     - Simplify the implementation of the G1 garbage collector's barriers, which record information about application memory accesses, by shifting their expansion from early in the C2 JIT's compilation pipeline to later.
 - [JEP 478: Key Derivation Function API (Preview)](https://openjdk.org/jeps/478)
-    - TODO
+    - Introduce an API for Key Derivation Functions (KDFs), which are cryptographic algorithms for deriving additional keys from a secret key and other data.
+    - see `KeyDerivationFunctionAPI.java`
 - [JEP 479: Remove the Windows 32-bit x86 Port](https://openjdk.org/jeps/479)
     - Remove the source code and build support for the Windows 32-bit x86 port. This port was deprecated for removal in JDK 21 with the express intent to remove it in a future release.
 - [JEP 483: Ahead-of-Time Class Loading & Linking](https://openjdk.org/jeps/483)
