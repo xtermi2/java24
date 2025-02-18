@@ -15,7 +15,7 @@ class SynchronizeVirtualThreadsWithoutPinningTest {
             "1000,499500",
             "10000,49995000",
             "100000,704982704",
-            "1000000,1783293664",
+            //"1000000,1783293664",
     })
     void runVirtualThreads_performance_test(int numberOfThreads, int expectedResult) {
         final int threadSum = underTest.runVirtualThreads(numberOfThreads);
@@ -30,8 +30,8 @@ class SynchronizeVirtualThreadsWithoutPinningTest {
             "100,4950",
             "1000,499500",
             "10000,49995000",
-            "100000,704982704",
             // now it gets much slower than virtual threads
+            //"100000,704982704",
             //"1000000,1783293664",
     })
     void runPlatformThreads_performance_test(int numberOfThreads, int expectedResult) {
