@@ -94,7 +94,8 @@
     - No significant changes second preview in JDK 23.
     - see example `FlexibleConstructorBodies.java`
 - [JEP 493: Linking Run-Time Images without JMODs](https://openjdk.org/jeps/493)
-    - TODO
+    - Reduce the size of the JDK by approximately 25% by enabling the `jlink` tool to create custom run-time images without using the JDK's JMOD files. This feature must be enabled when the JDK is built; it will not be enabled by default, and some JDK vendors may choose not to enable it.
+    - Allow users to link a run-time image from modules regardless of whether those modules are standalone JMOD files, modular JAR files, or are part of a run-time image linked previously.
 - [JEP 494: Module Import Declarations (Second Preview)](https://openjdk.org/jeps/494)
     - Enhance the Java programming language with the ability to succinctly import all of the packages exported by a
       module. This simplifies the reuse of modular libraries, but does not require the importing code to be in a module
@@ -114,7 +115,13 @@
         - New terminology and a revised title but otherwise unchanged.
     - see example `UnnamedClasses.java`
 - [JEP 496: Quantum-Resistant Module-Lattice-Based Key Encapsulation Mechanism](https://openjdk.org/jeps/496)
-    - TODO
+    - Enhance the security of Java applications by providing an implementation of the quantum-resistant Module-Lattice-Based Key-Encapsulation Mechanism (ML-KEM). Key encapsulation mechanisms (KEMs) are used to secure symmetric keys over insecure communication channels using public key cryptography. ML-KEM is designed to be secure against future quantum computing attacks. It has been standardized by the United States National Institute of Standards and Technology (NIST) in [FIPS 203](https://csrc.nist.gov/pubs/fips/203/final).
+    - Provide ML-KEM implementations of the KeyPairGenerator, KEM, and KeyFactory APIs, with support for the parameter sets ML-KEM-512, ML-KEM-768, and ML-KEM-1024 standardized in FIPS 203.
+    - The `keytool` will support generating ML-KEM key pairs and certificates, e.g.:
+    ```bash
+    keytool -keystore ks -storepass changeit -genkeypair -alias ec -keyalg ec -dname CN=ec -ext bc
+    keytool -keystore ks -storepass changeit -genkeypair -alias mlkem -keyalg ML-KEM -groupname ML-KEM-768 -dname CN=ML-KEM -signer ec
+    ```
 - [JEP 497: Quantum-Resistant Module-Lattice-Based Digital Signature Algorithm](https://openjdk.org/jeps/497)
     - TODO
 - [JEP 498: Warn upon Use of Memory-Access Methods in sun.misc.Unsafe](https://openjdk.org/jeps/498)
