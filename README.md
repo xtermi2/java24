@@ -119,13 +119,23 @@
     - Provide ML-KEM implementations of the KeyPairGenerator, KEM, and KeyFactory APIs, with support for the parameter sets ML-KEM-512, ML-KEM-768, and ML-KEM-1024 standardized in FIPS 203.
     - The `keytool` will support generating ML-KEM key pairs and certificates, e.g.:
     ```bash
+    # For example, to generate an ML-KEM key pair and sign the certificate with an EC key:
     keytool -keystore ks -storepass changeit -genkeypair -alias ec -keyalg ec -dname CN=ec -ext bc
     keytool -keystore ks -storepass changeit -genkeypair -alias mlkem -keyalg ML-KEM -groupname ML-KEM-768 -dname CN=ML-KEM -signer ec
     ```
 - [JEP 497: Quantum-Resistant Module-Lattice-Based Digital Signature Algorithm](https://openjdk.org/jeps/497)
-    - TODO
+    - Enhance the security of Java applications by providing an implementation of the quantum-resistant Module-Lattice-Based Digital Signature Algorithm (ML-DSA).
+    - Provide ML-DSA implementations of the KeyPairGenerator, Signature, and KeyFactory APIs, with support for the parameter sets ML-DSA-44, ML-DSA-65, and ML-DSA-87 standardized in FIPS 204
+    - The `keytool` will support generating ML-DSA key pairs and certificates, e.g.:
+    ```bash
+    # For example, to generate ML-DSA key pair and certificate
+    keytool -keystore ks -storepass changeit -genkeypair -alias mldsa -keyalg ML-DSA -groupname ML-DSA-65 -dname CN=ML-DSA
+    ```
 - [JEP 498: Warn upon Use of Memory-Access Methods in sun.misc.Unsafe](https://openjdk.org/jeps/498)
-    - TODO
+    - Issue a warning at run time on the first occasion that any memory-access method in sun.misc.Unsafe is invoked. All of these unsupported methods were terminally deprecated in JDK 23. They have been superseded by standard APIs, namely the VarHandle API (JEP 193, JDK 9) and the Foreign Function & Memory API (JEP 454, JDK 22).
+    - JDK 26 or later will throw an exception whenever a memory-access method is used, whether directly or via reflection. This will further alert application developers and users to the imminent removal of the methods. 
+    - In releases after JDK 26, we will remove memory-access methods which have had standard replacements since JDK 9 (2017). 
+    - In releases after JDK 26, we will remove memory-access methods which have only had standard replacements since JDK 22 (2023).
 - [JEP 499: Structured Concurrency (Fourth Preview)](https://openjdk.org/jeps/499)
     - Simplify concurrent programming by introducing an API for structured concurrency. Structured concurrency treats
       groups of related tasks running in different threads as a single unit of work, thereby streamlining error handling
@@ -134,7 +144,7 @@
     - see example `StructuredConcurrency.java`
 - [JEP 501: Deprecate the 32-bit x86 Port for Removal
   ](https://openjdk.org/jeps/501)
-    - TODO
+    - Deprecate the 32-bit x86 port, with the intent to remove it in a future release. This will thereby deprecate the Linux 32-bit x86 port, which is the only 32-bit x86 port remaining in the JDK. It will also, effectively, deprecate any remaining downstream 32-bit x86 ports. After the 32-bit x86 port is removed, the architecture-agnostic Zero port will be the only way to run Java programs on 32-bit x86 processors.
 
 ----------------------
 
