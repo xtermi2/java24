@@ -88,6 +88,7 @@
     - Reduce the maintenance cost of supporting two different modes.
 - [JEP 491: Synchronize Virtual Threads without Pinning](https://openjdk.org/jeps/491)
     - Improve the scalability of Java code that uses synchronized methods and statements by arranging for virtual threads that block in such constructs to release their underlying platform threads for use by other virtual threads. This will eliminate nearly all cases of virtual threads being pinned to platform threads, which severely restricts the number of virtual threads available to handle an application's workload.
+    - see `SynchronizeVirtualThreadsWithoutPinning.java`
 - [JEP 492: Flexible Constructor Bodies (Third Preview)](https://openjdk.org/jeps/492)
     - In constructors in the Java programming language, allow statements that do not reference the instance being
       created to appear before an explicit constructor invocation.
@@ -123,6 +124,7 @@
     keytool -keystore ks -storepass changeit -genkeypair -alias ec -keyalg ec -dname CN=ec -ext bc
     keytool -keystore ks -storepass changeit -genkeypair -alias mlkem -keyalg ML-KEM -groupname ML-KEM-768 -dname CN=ML-KEM -signer ec
     ```
+    - see `QuantumResistantModuleLatticeBasedKeyEncapsulationMechanism.java`
 - [JEP 497: Quantum-Resistant Module-Lattice-Based Digital Signature Algorithm](https://openjdk.org/jeps/497)
     - Enhance the security of Java applications by providing an implementation of the quantum-resistant Module-Lattice-Based Digital Signature Algorithm (ML-DSA).
     - Provide ML-DSA implementations of the KeyPairGenerator, Signature, and KeyFactory APIs, with support for the parameter sets ML-DSA-44, ML-DSA-65, and ML-DSA-87 standardized in FIPS 204
@@ -131,6 +133,7 @@
     # For example, to generate ML-DSA key pair and certificate
     keytool -keystore ks -storepass changeit -genkeypair -alias mldsa -keyalg ML-DSA -groupname ML-DSA-65 -dname CN=ML-DSA
     ```
+    - see `QuantumResistantModuleLatticeBasedDigitalSignatureAlgorithm.java`
 - [JEP 498: Warn upon Use of Memory-Access Methods in sun.misc.Unsafe](https://openjdk.org/jeps/498)
     - Issue a warning at run time on the first occasion that any memory-access method in sun.misc.Unsafe is invoked. All of these unsupported methods were terminally deprecated in JDK 23. They have been superseded by standard APIs, namely the VarHandle API (JEP 193, JDK 9) and the Foreign Function & Memory API (JEP 454, JDK 22).
     - JDK 26 or later will throw an exception whenever a memory-access method is used, whether directly or via reflection. This will further alert application developers and users to the imminent removal of the methods. 
